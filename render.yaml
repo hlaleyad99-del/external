@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: alhilal-ai-ltx
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: LTX_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: XKIRO_API_KEY
+        sync: false
+      - key: ADMIN_PHONE
+        sync: false
+      - key: ADMIN_INITIAL_PASSWORD
+        sync: false
+      # Firebase Admin (التخزين الدائم + التحقق من جوجل)
+      - key: FIREBASE_PROJECT_ID
+        sync: false
+      - key: FIREBASE_CLIENT_EMAIL
+        sync: false
+      - key: FIREBASE_PRIVATE_KEY
+        sync: false
+      # Firebase Web (لتفعيل زر تسجيل الدخول بجوجل) — Project settings → Your apps
+      - key: FIREBASE_WEB_API_KEY
+        sync: false
+      - key: FIREBASE_AUTH_DOMAIN
+        sync: false
+      - key: FIREBASE_APP_ID
+        sync: false
+      # اختياري: بريد جوجل الخاص بالمالك ليصبح أدمن
+      - key: ADMIN_EMAIL
+        sync: false
