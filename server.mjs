@@ -67,8 +67,8 @@ if (firebaseReady() && !getApps().length) {
 const db = firebaseReady() ? getFirestore() : null;
 if (!db) console.warn('⚠️ Firebase غير مضبوط: البيانات تُحفظ في ملفات محلية وقد تضيع عند إعادة النشر على Render.');
 
-const fallbackDir = path.join(__dirname, 'data');
-fs.mkdirSync(fallbackDir, { recursive: true });
+const fallbackDir = process.env.DATA_DIR ? path.resolve(process.env.DATA_DIR) : path.join(__dirname, 'data');
+try { fs.mkdirSync(fallbackDir, { recursive: true }); } catch (e) { console.warn('⚠️ تعذر إنشاء مجلد البيانات:', e.message); }
 const fallback = name => path.join(fallbackDir, name);
 function readJson(file, def) { try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch { return def; } }
 function writeJson(file, data) {

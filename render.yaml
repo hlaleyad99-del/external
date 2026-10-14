@@ -1,10 +1,12 @@
 services:
   - type: web
-    name: alhilal-ai-ltx
+    name: alhilal-ai
     runtime: node
+    plan: free
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health
+    autoDeploy: true
     envVars:
       - key: NODE_ENV
         value: production
@@ -29,7 +31,7 @@ services:
         sync: false
       - key: FIREBASE_PRIVATE_KEY
         sync: false
-      # Firebase Web (لتفعيل زر تسجيل الدخول بجوجل) — Project settings → Your apps
+      # Firebase Web (زر تسجيل الدخول بجوجل)
       - key: FIREBASE_WEB_API_KEY
         sync: false
       - key: FIREBASE_AUTH_DOMAIN
